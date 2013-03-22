@@ -1,0 +1,28 @@
+name: BedTime
+main: paalbra.BedTime.BedTime
+version: 1.3.1
+author: Paal Braathen
+commands:
+  bed:
+    description: List sleeping players
+    usage: /bed
+  bedidleaction:
+    description: Set the desired kick action
+    usage: /bedidleaction <action>
+    permission: bedtime.idleaction
+  bedidletime:
+    description: Sets the max time in seconds before a player is considered to be idle.
+    usage: /bedidletime <idle time in seconds>
+    permission: bedtime.idletime
+  bedcountdown:
+    description: Sets the count down time when countdown action is used
+    usage: /bedcountdown <count down time in seconds>
+    permission: bedtime.bedcountdown
+  bedsleepignore:
+    description: The given player will not have to sleep at night
+    usage: /bedsleepignore <player name>
+    permission: bedtime.sleepignore
+  bedsleepunignore:
+    description: The given player will have to sleep at night
+    usage: /bedsleepunignore <player name>
+    permission: bedtime.sleepunignore
