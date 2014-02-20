@@ -23,7 +23,6 @@ public class BedTimePlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerBedEnter(PlayerBedEnterEvent event) {
-		//plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new ConfirmPlayerHasEnteredBed(plugin, event.getPlayer()));
 		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new ConfirmPlayerHasEnteredBed(plugin, event.getPlayer()));
 	}
 
@@ -69,7 +68,6 @@ public class BedTimePlayerListener implements Listener {
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		//plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, new ConfirmPlayerHasQuit(plugin, event.getPlayer()));
 		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new ConfirmPlayerHasQuit(plugin, event.getPlayer()));
 	}
 
