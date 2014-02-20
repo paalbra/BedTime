@@ -27,7 +27,7 @@ public class ConfirmPlayerHasEnteredBed implements Runnable {
 		} else if (numRepeat > 0) {
 			plugin.getServer().getScheduler().runTaskLaterAsynchronously(plugin, new ConfirmPlayerHasQuit(plugin, player, numRepeat - 1), 5L);
 		} else {
-			plugin.log.warning(plugin.prefix + "Player(" + player.getName() + ") has not become offline even though he should have");
+			plugin.log.warning(plugin.prefix + "Player(" + player.getName() + ") has not fell asleep even though he should have");
 		}
 	}
 }
