@@ -9,9 +9,7 @@ public class ConfirmPlayerHasEnteredBed implements Runnable {
 	int numRepeat;
 
 	public ConfirmPlayerHasEnteredBed(BedTime plugin, Player player) {
-		this.plugin = plugin;
-		this.player = player;
-		this.numRepeat = 10;
+		this(plugin, player, 10);
 	}
 
 	public ConfirmPlayerHasEnteredBed(BedTime plugin, Player player, int numRepeat) {
