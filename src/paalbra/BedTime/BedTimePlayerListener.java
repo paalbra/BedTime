@@ -21,12 +21,12 @@ public class BedTimePlayerListener implements Listener {
 		plugin = instance;
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerBedEnter(PlayerBedEnterEvent event) {
 		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new ConfirmPlayerHasEnteredBed(plugin, event.getPlayer()));
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerHasEnteredBedEvent(PlayerHasEnteredBedEvent event) {
 		final Player player = event.getPlayer();
 		for (Player p : player.getWorld().getPlayers()) {
@@ -36,7 +36,7 @@ public class BedTimePlayerListener implements Listener {
 		plugin.takeAction(player.getWorld().getName());
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerBedLeave(final PlayerBedLeaveEvent event) {
 		// If there is a count down and no sleeping players, cancel it
 		Integer taskId = plugin.countdownIds.get(event.getPlayer().getWorld().getName());
@@ -54,24 +54,24 @@ public class BedTimePlayerListener implements Listener {
 		}
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerMove(PlayerMoveEvent event) {
 		plugin.registerPlayerActivity(event.getPlayer());
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
 		plugin.registerPlayerActivity(p);
 		plugin.setSleepingIgnoredStatus(p);
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		plugin.getServer().getScheduler().runTaskAsynchronously(plugin, new ConfirmPlayerHasQuit(plugin, event.getPlayer()));
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerHasQuit(PlayerHasQuitEvent event) {
 		Player player = event.getPlayer();
 
