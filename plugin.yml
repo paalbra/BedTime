@@ -18,6 +18,10 @@ commands:
     description: Sets the count down time when countdown action is used
     usage: /bedcountdown <count down time in seconds>
     permission: bedtime.bedcountdown
+  bedpercentage:
+    description: Sets the percentage when percentage action is used
+    usage: /bedpercentage <percentage in percent>
+    permission: bedtime.bedpercentage
   bedsleepignore:
     description: The given player will not have to sleep at night
     usage: /bedsleepignore <player name>

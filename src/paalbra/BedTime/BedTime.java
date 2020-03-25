@@ -32,6 +32,7 @@ public class BedTime extends JavaPlugin {
 	Action action;
 	protected HashMap<String, Integer> countdownIds = new HashMap<String, Integer>();
 	int countdown; // Countdown in seconds
+	int percentage;
 
 	@Override
 	public void onDisable() {
@@ -47,6 +48,7 @@ public class BedTime extends JavaPlugin {
 		this.getConfig().options().copyDefaults(true);
 		idletime = this.getConfig().getInt("idletime");
 		countdown = this.getConfig().getInt("countdown");
+		percentage = this.getConfig().getInt("percentage");
 
 		// Register events
 		PluginManager pm = this.getServer().getPluginManager();
@@ -88,6 +90,18 @@ public class BedTime extends JavaPlugin {
 			this.getConfig().set("countdown", countdown);
 			this.saveConfig();
 			sender.sendMessage(prefix + "countdown set to " + ChatColor.GREEN + countdown + "sec");
+			return true;
+		} else if (cmd.getName().equalsIgnoreCase("bedpercentage")) {
+			if (args.length != 1)
+				return false;
+			try {
+				percentage = Integer.parseInt(args[0]);
+			} catch (NumberFormatException e) {
+				return false;
+			}
+			this.getConfig().set("percentage", percentage);
+			this.saveConfig();
+			sender.sendMessage(prefix + "percentage set to " + ChatColor.GREEN + percentage + "%");
 			return true;
 		} else if (cmd.getName().equalsIgnoreCase("bedidleaction")) {
 			if (args.length != 1)
@@ -285,6 +299,24 @@ public class BedTime extends JavaPlugin {
 					countdownIds.put(w, countdownId);
 				}
 			}
+		} else if (action == Action.PERCENTAGE) {
+			List<Player> players = getServer().getWorld(w).getPlayers();
+			int canSleep = 0;
+			int isSleeping = 0;
+			for (Player p : players) {
+				if (!p.isSleepingIgnored()) {
+					canSleep++;
+					if (p.isSleeping()) {
+						isSleeping++;
+					}
+				}
+			}
+			int needed = (int) Math.ceil((float)percentage/100 * canSleep);
+			this.getServer().broadcastMessage(prefix + "Sleepers needed " + isSleeping + "/" + needed);
+			if (isSleeping >= needed) {
+				getServer().getWorld(w).setTime(0);
+			}
+
 		} else if (action == Action.DISABLE) {
 			// Do nothing
 		}
@@ -297,6 +329,6 @@ public class BedTime extends JavaPlugin {
 	}
 
 	enum Action {
-		KICK, COUNTDOWN, DISABLE
+		COUNTDOWN, DISABLE, KICK, PERCENTAGE
 	}
 }
