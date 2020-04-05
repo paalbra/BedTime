@@ -312,9 +312,11 @@ public class BedTime extends JavaPlugin {
 				}
 			}
 			int needed = (int) Math.ceil((float)percentage/100 * canSleep);
-			this.getServer().broadcastMessage(prefix + "Sleepers needed " + isSleeping + "/" + needed);
 			if (isSleeping >= needed) {
 				getServer().getWorld(w).setTime(0);
+				this.getServer().broadcastMessage(prefix + "Rise and shine!");
+			} else {
+				this.getServer().broadcastMessage(prefix + "Sleepers needed " + isSleeping + "/" + needed);
 			}
 
 		} else if (action == Action.DISABLE) {
