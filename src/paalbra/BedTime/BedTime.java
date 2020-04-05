@@ -301,17 +301,17 @@ public class BedTime extends JavaPlugin {
 			}
 		} else if (action == Action.PERCENTAGE) {
 			List<Player> players = getServer().getWorld(w).getPlayers();
-			int canSleep = 0;
+			int shouldSleep = 0;
 			int isSleeping = 0;
 			for (Player p : players) {
 				if (!p.isSleepingIgnored()) {
-					canSleep++;
-					if (p.isSleeping()) {
-						isSleeping++;
-					}
+					shouldSleep++;
+				}
+				if (p.isSleeping()) {
+					isSleeping++;
 				}
 			}
-			int needed = (int) Math.ceil((float)percentage/100 * canSleep);
+			int needed = (int) Math.ceil((float)percentage/100 * shouldSleep);
 			String message;
 			if (isSleeping >= needed) {
 				getServer().getWorld(w).setTime(0);
