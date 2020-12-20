@@ -6,11 +6,12 @@ The plugin can also be found here: https://dev.bukkit.org/projects/bed-time
 
 # Build
 
-You will need to get spigot.jar and place it in `jars\spigot.jar`. Instructions: https://www.spigotmc.org/wiki/buildtools/
-
-```
-mkdir build
-javac -d build -classpath jars/spigot.jar src/paalbra/BedTime/*.java
-cp *.yml build
-jar -cvf build/BedTime.jar -C build .
+```bash
+cd container
+IMAGE_ID=$(podman build . | tail -n 1)
+CONTAINER_ID=$(podman create $IMAGE_ID https://github.com/paalbra/BedTime.git)
+BEDTIME_PATH=$(podman start -a $CONTAINER_ID | tail -n 1 | cut -f 2 --delimiter " ")
+podman cp $CONTAINER_ID:$BEDTIME_PATH .
+podman rm $CONTAINER_ID
+podman image rm $IMAGE_ID
 ```
