@@ -6,6 +6,8 @@ The plugin can also be found here: https://dev.bukkit.org/projects/bed-time
 
 # Build
 
+Assuming you have podman: https://podman.io/getting-started/installation.html
+
 ```bash
 cd container
 IMAGE_ID=$(podman build . | tail -n 1)
